@@ -1,16 +1,22 @@
 
 import React from 'react'
-import { ChakraProvider } from '@chakra-ui/react'
+
+import { compose } from 'ramda'
 import { AnimatePresence } from 'framer-motion'
 
-import { theme } from '../src/theme'
+import { Layout } from '../src/components/Layout'
+import { withApollo } from '../src/hoc/withApollo'
+import { withTheme } from '../src/hoc/withTheme'
 
-export default function App ({ Component, pageProps, router }) {
-  return (
-    <ChakraProvider theme={theme}>
-      <AnimatePresence exitBeforeEnter>
-        <Component {...pageProps} key={router.route} />
-      </AnimatePresence>
-    </ChakraProvider>
-  )
-}
+const App = ({ Component, pageProps, router }) => (
+  <Layout>
+    <AnimatePresence exitBeforeEnter>
+      <Component {...pageProps} key={router.route} />
+    </AnimatePresence>
+  </Layout>
+)
+
+export default compose(
+  withApollo,
+  withTheme()
+)(App)
