@@ -1,0 +1,31 @@
+{
+  "name": "contentful-livestream",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TillaTheHun0/contentful-livestream.git"
+  },
+  "author": "Tyler Hall",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TillaTheHun0/contentful-livestream/issues"
+  },
+  "homepage": "https://github.com/TillaTheHun0/contentful-livestream#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "husky": "^4.3.0",
+    "lerna": "^3.22.1",
+    "lint-staged": "^10.5.1",
+    "standard": "^16.0.3"
+  },
+  "workspaces": [
+    "packages/**"
+  ]
+}
