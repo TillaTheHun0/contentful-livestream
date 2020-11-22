@@ -5,7 +5,11 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "lerna run build --stream",
+    "dev": "lerna run dev --stream",
+    "lint": "standard",
+    "postinstall": "lerna bootstrap",
+    "test": "yarn lint"
   },
   "repository": {
     "type": "git",
