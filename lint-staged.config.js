@@ -1,4 +1,4 @@
 
 module.exports = {
-  '*.{js,jsx}': ['npx standard']
+  '*.{js,jsx}': ['npx standard --fix']
 }
