@@ -1,5 +1,6 @@
 
 import { ApolloClient, InMemoryCache } from '@apollo/client'
+import { prop, uniqBy } from 'ramda'
 
 let client
 
@@ -22,7 +23,18 @@ export const initApolloClient = () => {
   }
 
   client = new ApolloClient({
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      typePolicies: {
+        Query: {
+          fields: {
+            pokemonCollection: {
+              keyArgs: false,
+              merge: (existing = [], incoming) => uniqBy(prop('name'))([...existing, ...incoming])
+            }
+          }
+        }
+      }
+    }),
     uri: getUrl()
   })
 

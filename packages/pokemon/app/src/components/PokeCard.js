@@ -9,7 +9,7 @@ import { TypeBadge } from './TypeBadge'
 
 const MotionBox = motion.custom(Box)
 
-export const PokeCard = ({ name, types, spriteUrl, weight, rating }) => {
+export const PokeCard = ({ name, types, spriteUrl, weight, hasBlogs }) => {
   return (
     <Fade in>
       <MotionBox
@@ -18,9 +18,10 @@ export const PokeCard = ({ name, types, spriteUrl, weight, rating }) => {
         borderWidth='1px'
         borderRadius='xl'
         backgroundColor='white'
+        {...hasBlogs ? { borderColor: 'teal.200' } : {}}
         shadow='lg'
         whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.9 }}
+        whileTap={{ scale: 0.95 }}
       >
         <Box width={100} m='auto'>
           <Image src={spriteUrl} height={100} width={100} />
@@ -37,7 +38,7 @@ export const PokeCard = ({ name, types, spriteUrl, weight, rating }) => {
         <Flex mt={2} align='center'>
           <Box as={StarIcon} color='orange.400' />
           <Text ml={1} fontSize='sm' fontWeight='semibold'>
-            {rating}
+            {Math.floor(Math.random() * 5) + 1}
           </Text>
         </Flex>
       </MotionBox>

@@ -1,9 +1,8 @@
 
 import Head from 'next/head'
 import Image from 'next/image'
-import Link from 'next/link'
 
-import { Box, Flex } from '@chakra-ui/react'
+import { Box, Flex, Link } from '@chakra-ui/react'
 
 export const Layout = ({ children }) => (
   <>
@@ -12,7 +11,7 @@ export const Layout = ({ children }) => (
       <link rel='icon' href='/favicon.ico' />
     </Head>
     <Flex flexDirection='column' id='container'>
-      <Box backgroundColor='teal.300' py={2} px={8} flexShrink={0}>
+      <Box backgroundColor='teal.300' py={2} px={8} display='flex' flexDirection='row'>
         <Box mt={4} cursor='pointer'>
           <Link href='/'>
             <Image src='/pokeApi.png' width={104} height={42} />
