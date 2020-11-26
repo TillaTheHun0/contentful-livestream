@@ -2,9 +2,9 @@
 import React from 'react'
 import { ApolloProvider } from '@apollo/client'
 
-import { createClient } from '../apollo/client'
+import { initApolloClient } from '../apollo/client'
 
-const client = createClient()
+const client = initApolloClient()
 
 export const withApollo = Component => {
   const WithApollo = ({ ...props }) => (
