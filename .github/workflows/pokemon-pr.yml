@@ -1,5 +1,5 @@
 
-name: Pokemon Test
+name: Pokemon Test And Deploy Contentful
 
 on:
   pull_request:
@@ -47,3 +47,37 @@ jobs:
           yarn test
         env:
           CI: true
+  deploy_contentful:
+    name: Deploy Contentful Sandbox
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      
+      - name: Uses Node.js 14
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+
+      - run: npm install -g yarn@1
+
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+        
+      - name: yarn install
+        run: |
+          yarn
+
+      - name: Deploy Contentful
+        uses: contentful/contentful-action@main
+        env:
+          SPACE_ID: ${{ secrets.POKEMON_CONTENTFUL_SPACE_ID }}
+          MANAGEMENT_API_KEY: ${{ secrets.POKEMON_CONTENTFUL_MANAGEMENT_API_KEY }}
+          MIGRATIONS_DIR: 'packages/pokemon/contentful-migrations/src'
