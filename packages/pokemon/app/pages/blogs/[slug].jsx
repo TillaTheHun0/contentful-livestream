@@ -10,11 +10,14 @@ import { BlogCard } from '../../src/components/BlogCard'
 const blogsLens = lensPath(['data', 'pokemonBlogCollection', 'items'])
 
 const GET_RELATED_BLOGS = gql`
-  query GetRelatedBlogs ($name: String!, $currentSlug: String!) {
+  query GetRelatedBlogs ($name: String!, $types: [String!]! $currentSlug: String!) {
     pokemonBlogCollection (
       where: {
         AND: {
-          name: $name,
+          OR: [
+            { name: $name },
+            { relatedPokeTypes_contains_some: $types }
+          ]
           slug_not: $currentSlug
         }
       }
@@ -33,9 +36,11 @@ const GET_RELATED_BLOGS = gql`
 `
 
 export default function Blog ({ blog }) {
-  const { title, content, name, slug } = blog
+  const { title, content, name, relatedPokeTypes, slug } = blog
 
-  const { data, loading } = useQuery(GET_RELATED_BLOGS, { variables: { name, currentSlug: slug } })
+  const { data, loading } = useQuery(GET_RELATED_BLOGS, {
+    variables: { name, types: relatedPokeTypes, currentSlug: slug }
+  })
 
   return (
     <Box minHeight='100vh' mt={4} borderTopLeftRadius={40} backgroundColor='white'>
@@ -77,6 +82,7 @@ export async function getServerSideProps ({ params }) {
             name
             slug
             title
+            relatedPokeTypes
             content {
               json
             }
