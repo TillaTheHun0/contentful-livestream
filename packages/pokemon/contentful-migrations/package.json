@@ -1,5 +1,12 @@
 {
   "name": "@pokemon/contentful-migrations",
   "version": "0.1.0",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@apollo/client": "^3.2.9",
+    "cross-fetch": "^3.0.6"
+  },
+  "devDependencies": {
+    "contentful-migration": "^2.0.12"
+  }
 }
