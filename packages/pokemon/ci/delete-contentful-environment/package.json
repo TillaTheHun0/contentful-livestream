@@ -1,0 +1,10 @@
+{
+  "name": "@pokemon/delete-contentful-environment",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "4.0.0",
+    "contentful-management": "7.5.0"
+  }
+}

@@ -1,0 +1,45 @@
+
+name: Delete Contentful Environment on merge
+on: 
+  pull_request:
+    types: [closed]
+  
+jobs:
+  delete-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      
+      - name: Uses Node.js 14
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+
+      - run: npm install -g yarn@1
+
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+        
+      - name: yarn install
+        run: |
+          yarn
+      - name: Delete Contentful Environment
+        id: deletion
+        # if: github.event.pull_request.merged
+        uses: ./packages/pokemon/ci/delete-contentful-environment
+        env:
+          SPACE_ID: ${{ secrets.POKEMON_CONTENTFUL_SPACE_ID }}
+          MANAGEMENT_API_KEY: ${{ secrets.POKEMON_CONTENTFUL_MANAGEMENT_API_KEY }}
+      - name: Comment Contentful Info
+        uses: peter-evans/commit-comment@v1
+        with:
+          body: |
+            Contentful Environment Deleted Successfully :sparkles:
+            
+            **Environment Name**: _${{ steps.deletion.outputs.environment_name }}_

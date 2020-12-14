@@ -1,0 +1,9 @@
+
+name: 'Delete Contentful Branch Environment'
+description: 'Delete Contentful Branch Environment as part of CI'
+runs:
+  using: 'node12'
+  main: 'src/index.js'
+outputs:
+  environment_name:
+    description: "The name of the Contentful environment deleted"
