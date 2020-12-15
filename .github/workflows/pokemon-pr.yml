@@ -76,8 +76,20 @@ jobs:
           yarn
 
       - name: Deploy Contentful
+        id: migration
         uses: contentful/contentful-action@main
         env:
           SPACE_ID: ${{ secrets.POKEMON_CONTENTFUL_SPACE_ID }}
           MANAGEMENT_API_KEY: ${{ secrets.POKEMON_CONTENTFUL_MANAGEMENT_API_KEY }}
           MIGRATIONS_DIR: 'packages/pokemon/contentful-migrations/src'
+      - name: Comment Contentful Info
+        uses: peter-evans/commit-comment@v1
+        with:
+          body: |
+            Contentful Environment Created and Migrated Successfully :sparkles:
+            
+            **Environment Name**: _${{ steps.migration.outputs.environment_name }}_
+
+            Click [here][1] to go to new environment
+            
+            [1]: ${{steps.migration.outputs.environment_url}}
