@@ -3,7 +3,7 @@ const { ApolloClient, HttpLink, InMemoryCache, gql } = require('@apollo/client')
 const fetch = require('cross-fetch')
 
 const client = new ApolloClient({
-  link: new HttpLink({ uri: 'https://pokemon-lover.vercel.app/api/graphql', fetch }),
+  link: new HttpLink({ uri: 'https://contentful-livestream.vercel.app/api/graphql', fetch }),
   cache: new InMemoryCache()
 })
 
