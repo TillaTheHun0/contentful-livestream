@@ -35,6 +35,7 @@ module.exports = async function (migration) {
       contentType: POKEMON_BLOG_TYPE,
       from: ['name'],
       to: [RELATED_TYPES_FIELD],
+      shouldPublish: true,
       transformEntryForLocale: async (from, locale) => {
         // Fetch pokemon types from our graph
         const { data } = await client.query({ query: POKEMON_TYPES_QUERY, variables: { name: from.name[locale] } })
