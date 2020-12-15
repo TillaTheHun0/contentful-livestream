@@ -27,15 +27,7 @@ module.exports = async function (migration) {
     .name('Related Poke Types')
     .type('Array')
     .items({
-      type: 'Symbol',
-      validations: [
-        {
-          in: [
-            'bug', 'dark', 'dragon', 'electric', 'fairy', 'fighting', 'fire', 'flying', 'ghost',
-            'grass', 'ground', 'ice', 'normal', 'poison', 'psychic', 'rock', 'steel', 'water'
-          ]
-        }
-      ]
+      type: 'Symbol'
     })
 
   try {
